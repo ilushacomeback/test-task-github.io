@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/test-task-github.io/static/css/main.f9957b25.css",
-    "main.js": "/test-task-github.io/static/js/main.0d6d66a4.js",
+    "main.js": "/test-task-github.io/static/js/main.c3a456fb.js",
     "static/media/roboto-latin-500-normal.woff2": "/test-task-github.io/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/test-task-github.io/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
     "static/media/roboto-latin-400-normal.woff2": "/test-task-github.io/static/media/roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2",
@@ -60,10 +60,10 @@
     "static/media/roboto-greek-ext-700-normal.woff": "/test-task-github.io/static/media/roboto-greek-ext-700-normal.249853776d22a271b2b5.woff",
     "index.html": "/test-task-github.io/index.html",
     "main.f9957b25.css.map": "/test-task-github.io/static/css/main.f9957b25.css.map",
-    "main.0d6d66a4.js.map": "/test-task-github.io/static/js/main.0d6d66a4.js.map"
+    "main.c3a456fb.js.map": "/test-task-github.io/static/js/main.c3a456fb.js.map"
   },
   "entrypoints": [
     "static/css/main.f9957b25.css",
-    "static/js/main.0d6d66a4.js"
+    "static/js/main.c3a456fb.js"
   ]
 }
