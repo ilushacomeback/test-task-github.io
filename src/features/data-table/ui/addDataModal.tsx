@@ -25,7 +25,6 @@ export const AddDataModal = ({ isOpenModal, setIsOpenModal }: Props) => {
   const [documentStatus, setDocumentStatus] = useState<string>('');
   const [documentType, setDocumentType] = useState<string>('');
   const [employeeNumber, setEmployeeNumber] = useState<string>('');
-  const [employeeSigDate, setEmployeeSigDate] = useState<string>('');
   const [employeeSignatureName, setEmployeeSignatureName] =
     useState<string>('');
 
@@ -54,11 +53,6 @@ export const AddDataModal = ({ isOpenModal, setIsOpenModal }: Props) => {
   ) => {
     setEmployeeNumber(e.target.value);
   };
-  const handleSetEmployeeSigDate = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setEmployeeSigDate(e.target.value);
-  };
   const handleSetEmployeeSignatureName = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -72,14 +66,15 @@ export const AddDataModal = ({ isOpenModal, setIsOpenModal }: Props) => {
         component: 'form',
         onSubmit: async (e: React.FormEvent) => {
           e.preventDefault();
+          const time = new Date().toISOString()
           const data = {
-            companySigDate: new Date().toISOString(),
+            companySigDate: time,
             companySignatureName,
             documentName,
             documentStatus,
             documentType,
             employeeNumber,
-            employeeSigDate,
+            employeeSigDate: time,
             employeeSignatureName,
           };
           const response = await addData(data);
@@ -121,12 +116,6 @@ export const AddDataModal = ({ isOpenModal, setIsOpenModal }: Props) => {
             label="employeeNumber"
             value={employeeNumber}
             onChange={handleSetEmployeeNumber}
-          />
-          <TextField
-            type="text"
-            label="employeeSigDate"
-            value={employeeSigDate}
-            onChange={handleSetEmployeeSigDate}
           />
           <TextField
             type="text"
