@@ -1,12 +1,14 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { authReducer, authActions, authApi, dataApi } from '../entities';
+import { authReducer, authActions, authApi, dataApi, dataReducer, dataActions } from '../entities';
 
 const actions = {
   ...authActions,
+  ...dataActions
 };
 
 const reducer = combineReducers({
   authReducer,
+  dataReducer,
   [authApi.reducerPath]: authApi.reducer,
   [dataApi.reducerPath]: dataApi.reducer,
 });

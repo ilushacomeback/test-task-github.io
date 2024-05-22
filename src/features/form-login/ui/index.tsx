@@ -1,56 +1,79 @@
-import { Stack, Input, Button, FormControl, FormGroup } from '@mui/material';
+import {
+  Stack,
+  Button,
+  FormControl,
+  FormGroup,
+  TextField,
+  Box,
+  // Snackbar,
+} from '@mui/material';
 import React, { useState } from 'react';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../../entities';
 
 export const FormLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorLogin, setErrorLogin] = useState<boolean>(false);
+  // const [errorNetwork, setErrorNetwork] = useState<boolean>(false);
   const [getData] = useLoginMutation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSetUsername = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setUsername(e.target.value);
+    setErrorLogin(false);
   };
   const handleSetPassword = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setPassword(e.target.value);
+    setErrorLogin(false);
   };
 
-  const handleOnSubmit = async () => {
+  const handleOnSubmit = async (e: React.FormEvent) => {
     try {
+      e.preventDefault();
       const user = { username, password };
       const response = await getData(user);
       if (response?.error) {
         throw new Error('invalid login');
       }
-      navigate('/data');
+      navigate('/');
     } catch (e) {
-      console.log(e);
+      if (e instanceof Error && e.message === 'invalid login') {
+        setErrorLogin(true);
+      }
     }
   };
 
   return (
-    <Form onSubmit={handleOnSubmit}>
+    <Box component="form" onSubmit={handleOnSubmit}>
       <FormGroup>
         <Stack spacing={2}>
           <FormControl>
-            <Input
+            <TextField
+              autoFocus
               type="text"
-              placeholder="Ваше имя..."
+              required
+              label="Ваше имя"
+              variant="standard"
               value={username}
               onChange={handleSetUsername}
+              error={errorLogin}
             />
           </FormControl>
           <FormControl>
-            <Input
+            <TextField
               type="password"
-              placeholder="Пароль..."
+              required
+              label="Пароль"
+              variant="standard"
               value={password}
               onChange={handleSetPassword}
+              error={errorLogin}
+              helperText={errorLogin ? 'Имя или пароль неправильные' : ''}
             />
           </FormControl>
           <Button variant="contained" type="submit">
@@ -58,6 +81,7 @@ export const FormLogin = () => {
           </Button>
         </Stack>
       </FormGroup>
-    </Form>
+      {/* <Snackbar open={errorNetwork} autoHideDuration={1500} /> */}
+    </Box>
   );
 };

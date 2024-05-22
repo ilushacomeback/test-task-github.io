@@ -2,9 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getUser } from './helpers/getUser';
 import { authApi } from '../api';
 
+const initialState = getUser()
+
 const authSlice = createSlice({
   name: 'authSlice',
-  initialState: getUser(),
+  initialState,
   reducers: {
     logout(state) {
       localStorage.removeItem('user');

@@ -1,7 +1,7 @@
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { PrivateOutlet } from '../ui/privateOutlet/PrivateOutlet';
 import { Login } from '../../pages';
-import { Table } from '../../entities/data-table/ui/table';
+import { Table } from '../../pages';
 
 const router = createHashRouter([
   {
@@ -9,7 +9,7 @@ const router = createHashRouter([
     element: <PrivateOutlet />,
     children: [
       {
-        path: '/data',
+        path: '',
         element: <Table />
       }
     ],
