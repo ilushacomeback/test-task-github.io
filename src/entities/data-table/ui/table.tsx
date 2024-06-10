@@ -7,15 +7,19 @@ import {
   Table as BoxTable,
   Paper,
   TableCell,
+  Button,
 } from '@mui/material';
+import { DeleteOutline } from '@mui/icons-material';
 import { useGetDataQuery } from '../api';
 import { useAppSelector } from '../../../app/hooks';
+import _ from 'lodash'
 
 interface Props {
   AddData: React.ComponentType;
 }
 
 export interface DataTable {
+  [index: string]: string;
   companySigDate: string;
   companySignatureName: string;
   documentName: string;
@@ -24,6 +28,7 @@ export interface DataTable {
   employeeNumber: string;
   employeeSigDate: string;
   employeeSignatureName: string;
+  id: string;
 }
 
 export const TableWithData = ({ AddData }: Props) => {
@@ -57,19 +62,16 @@ export const TableWithData = ({ AddData }: Props) => {
           <TableBody>
             {response &&
               data.map((item: DataTable) => (
-                <TableRow key={item.companySigDate}>
-                  <TableCell align="left">{item.companySigDate}</TableCell>
-                  <TableCell align="left">
-                    {item.companySignatureName}
-                  </TableCell>
-                  <TableCell align="left">{item.documentName}</TableCell>
-                  <TableCell align="left">{item.documentStatus}</TableCell>
-                  <TableCell align="left">{item.documentType}</TableCell>
-                  <TableCell align="left">{item.employeeNumber}</TableCell>
-                  <TableCell align="left">{item.employeeSigDate}</TableCell>
-                  <TableCell align="left">
-                    {item.employeeSignatureName}
-                  </TableCell>
+                <TableRow key={item.id}>
+                  {namesRows.map((name) => (
+                    <TableCell
+                      size="medium"
+                      align="left"
+                      key={_.uniqueId()}
+                    >
+                      {item[name]}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
           </TableBody>
@@ -79,3 +81,38 @@ export const TableWithData = ({ AddData }: Props) => {
     </>
   );
 };
+
+
+  /* <>
+<TableRow key={item.companySigDate}>
+  <TableCell size="medium" align="left">
+    {item.companySigDate}
+  </TableCell>
+  <TableCell size="medium" align="left">
+    {item.companySignatureName}
+  </TableCell>
+  <TableCell size="medium" align="left">
+    {item.documentName}
+  </TableCell>
+  <TableCell size="medium" align="left">
+    {item.documentStatus}
+  </TableCell>
+  <TableCell size="medium" align="left">
+    {item.documentType}
+  </TableCell>
+  <TableCell size="medium" align="left">
+    {item.employeeNumber}
+  </TableCell>
+  <TableCell size="medium" align="left">
+    {item.employeeSigDate}
+  </TableCell>
+  <TableCell
+    size="medium"
+    align="left"
+    sx={{ position: 'relative' }}
+  >
+    {item.employeeSignatureName}
+  </TableCell>
+</TableRow>
+</> */
+

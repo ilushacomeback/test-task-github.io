@@ -17,12 +17,19 @@ const dataSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      dataApi.endpoints.getData.matchFulfilled,
-      (state, { payload: { data } }) => {
-        state.data.push(...data);
-      }
-    );
+    builder
+      .addMatcher(
+        dataApi.endpoints.getData.matchFulfilled,
+        (state, { payload: { data } }) => {
+          state.data.push(...data);
+        }
+      )
+      .addMatcher(
+        dataApi.endpoints.removeData.matchFulfilled,
+        (state, { payload: { id } }) => {
+          state.data = state.data.filter((doc) => doc.id !== id);
+        }
+      );
   },
 });
 

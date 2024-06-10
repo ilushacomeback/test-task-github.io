@@ -20,13 +20,13 @@ export const FormLogin = () => {
   const navigate = useNavigate();
 
   const handleSetUsername = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setUsername(e.target.value);
     setErrorLogin(false);
   };
   const handleSetPassword = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setPassword(e.target.value);
     setErrorLogin(false);
